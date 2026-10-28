@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Next-day signal</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip" href="#signal">Skip to the signal</a>
+
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <div class="intro">
+        <h1>Next-day signal</h1>
+        <p class="lede">Will tomorrow's move be down, flat or up? A model reads price indicators and news sentiment, then puts a probability on each outcome.</p>
+      </div>
+
+      <form id="ticker-form" class="ticker-form" novalidate>
+        <label for="ticker">Ticker symbol</label>
+        <div class="ticker-row">
+          <input id="ticker" name="ticker" value="AAPL" placeholder="AAPL" maxlength="10"
+                 autocomplete="off" autocapitalize="characters" spellcheck="false"
+                 aria-describedby="ticker-hint">
+          <button type="submit" id="go">Get signal</button>
+        </div>
+        <p id="ticker-hint" class="hint">Letters, numbers, dot or hyphen, like BRK-B.</p>
+        <div id="chips" class="chips"></div>
+      </form>
+    </div>
+  </header>
+
+  <div class="disclaimer" role="note">
+    <div class="wrap">
+      <span id="disclaimer-text">Educational demonstration only. Not financial or investment advice. Predictions are uncertain and can be wrong. No live trading.</span>
+    </div>
+  </div>
+
+  <main class="wrap" id="main">
+    <section id="signal" class="signal" aria-live="polite" aria-busy="true" aria-label="Signal">
+      <p class="status">Loading the signal…</p>
+    </section>
+
+    <section id="price" class="block" aria-labelledby="price-h">
+      <div class="block-head">
+        <h2 id="price-h">Price history</h2>
+        <div class="range" role="group" aria-label="Chart range">
+          <button type="button" data-days="63" aria-pressed="false">3M</button>
+          <button type="button" data-days="126" aria-pressed="true">6M</button>
+          <button type="button" data-days="252" aria-pressed="false">1Y</button>
+        </div>
+      </div>
+      <div id="chart" class="chart"><p class="status">Loading prices…</p></div>
+      <ul class="legend" aria-hidden="true">
+        <li><svg width="28" height="10"><line x1="0" y1="5" x2="28" y2="5" class="l-close"/></svg>Close</li>
+        <li><svg width="28" height="10"><line x1="0" y1="5" x2="28" y2="5" class="l-sma10"/></svg>10-day average</li>
+        <li><svg width="28" height="10"><line x1="0" y1="5" x2="28" y2="5" class="l-sma30"/></svg>30-day average</li>
+      </ul>
+    </section>
+
+    <section id="evaluation" class="block" aria-labelledby="eval-h">
+      <h2 id="eval-h">How the models did on held-out days</h2>
+      <p class="prose">Every score below comes from days the model never saw in training: the most recent slice of history, split by date with no shuffling.</p>
+      <div id="eval-body"><p class="status">Loading evaluation…</p></div>
+    </section>
+
+    <section id="headline-check" class="block" aria-labelledby="check-h">
+      <h2 id="check-h">Check a headline</h2>
+      <p class="prose">Paste a news headline to see how the sentiment model reads it. This is the same scorer that feeds the signal.</p>
+      <form id="check-form" novalidate>
+        <label for="headline" class="sr-only">Headline text</label>
+        <textarea id="headline" rows="3" maxlength="1000" placeholder="Company beats earnings estimates and raises full-year guidance"></textarea>
+        <div class="check-row">
+          <span id="count" class="count">0 / 1000</span>
+          <button type="submit" id="score-btn">Score headline</button>
+        </div>
+      </form>
+      <div class="examples" id="examples"></div>
+      <div id="check-result" class="check-result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="wrap site-foot">
+    <p id="footer-disclaimer">Educational demonstration only. Not financial or investment advice.</p>
+    <p>Prices from Yahoo Finance, headlines from NewsAPI, sentiment scored by FinBERT.</p>
+  </footer>
+</body>
+</html>

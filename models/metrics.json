@@ -1,0 +1,23 @@
+{
+  "majority_class": {
+    "accuracy": 0.36607142857142855,
+    "macro_f1": 0.17864923747276687,
+    "weighted_f1": 0.1961951447245565,
+    "directional_accuracy": 0.5446428571428571,
+    "directional_calls": 336,
+    "call_rate": 1.0
+  },
+  "price_only": {
+    "accuracy": 0.30357142857142855,
+    "macro_f1": 0.2939287483423944,
+    "weighted_f1": 0.29742917623210036,
+    "directional_accuracy": 0.5229007633587787,
+    "directional_calls": 262,
+    "call_rate": 0.7797619047619048
+  },
+  "_meta": {
+    "train_rows": 1341,
+    "test_rows": 336,
+    "always_up_directional": 0.5446428571428571
+  }
+}
